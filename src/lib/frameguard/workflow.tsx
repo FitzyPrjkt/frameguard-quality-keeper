@@ -227,15 +227,19 @@ export function useWorkflow() {
 /* ------------------------------------------------------------------ */
 
 export const WORKFLOW_STEPS = [
-  { id: "select", label: "Select video", to: "/videos" },
-  { id: "analyze", label: "Analyze source", to: "/analysis" },
-  { id: "assess", label: "Assess compatibility", to: "/compatibility" },
-  { id: "decide", label: "Preparation decision", to: "/preparation" },
-  { id: "confirm", label: "Confirm", to: "/review" },
-  { id: "process", label: "Process", to: "/processing" },
-  { id: "verify", label: "Verify output", to: "/verification" },
-  { id: "export", label: "Export or share", to: "/export" },
+  { id: "select", label: "Select video", short: "Select", to: "/videos" },
+  { id: "analyze", label: "Analyze source", short: "Analyze", to: "/analysis" },
+  { id: "assess", label: "Assess compatibility", short: "Assess", to: "/compatibility" },
+  { id: "decide", label: "Preparation decision", short: "Decide", to: "/preparation" },
+  { id: "confirm", label: "Confirm", short: "Confirm", to: "/review" },
+  { id: "process", label: "Process", short: "Process", to: "/processing" },
+  { id: "verify", label: "Verify output", short: "Verify", to: "/verification" },
+  { id: "export", label: "Export or share", short: "Export", to: "/export" },
 ] as const;
+
+export function stepAt(i: number) {
+  return WORKFLOW_STEPS[i] ?? WORKFLOW_STEPS[0];
+}
 
 export type StepState = "complete" | "current" | "available" | "locked" | "skipped";
 

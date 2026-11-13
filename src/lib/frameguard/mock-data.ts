@@ -15,8 +15,8 @@ import type {
 export const DEMO_LABEL = "DEMO DATA — NOT A VERIFIED TIKTOK CAPABILITY PROFILE";
 
 const m = (value: string): Field => ({ kind: "measured", value });
-const unknown = (note?: string): Field => ({ kind: "unknown", note });
-const na = (note?: string): Field => ({ kind: "unavailable", note });
+const unknown = (note?: string): Field => (note ? { kind: "unknown", note } : { kind: "unknown" });
+const na = (note?: string): Field => (note ? { kind: "unavailable", note } : { kind: "unavailable" });
 
 export const SAMPLE_FILE = {
   name: "sample-video.mp4",
@@ -91,7 +91,7 @@ export const PROFILES: PlatformProfile[] = [
   },
 ];
 
-export const getProfile = (id: string) => PROFILES.find((p) => p.id === id) ?? PROFILES[0];
+export const getProfile = (id: string): PlatformProfile => PROFILES.find((p) => p.id === id) ?? PROFILES[0]!;
 
 /* ------------------------------------------------------------------ */
 /* Source metadata                                                     */
@@ -468,7 +468,7 @@ export const SCENARIOS: Scenario[] = [
   },
 ];
 
-export const getScenario = (id: string) => SCENARIOS.find((s) => s.id === id) ?? SCENARIOS[1];
+export const getScenario = (id: string): Scenario => SCENARIOS.find((s) => s.id === id) ?? SCENARIOS[1]!;
 
 /* ------------------------------------------------------------------ */
 /* History                                                             */

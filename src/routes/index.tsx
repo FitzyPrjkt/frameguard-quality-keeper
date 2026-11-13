@@ -6,7 +6,7 @@ import { DemoNotice, EmptyState, Page, PageHeader, Section, Surface } from "@/co
 import { Status, profileStatusMeta, verificationMeta } from "@/components/fg/status";
 import { formatDate } from "@/lib/frameguard/format";
 import { decisionMeta } from "@/lib/frameguard/preparation";
-import { WORKFLOW_STEPS, furthestReachableStep, useWorkflow } from "@/lib/frameguard/workflow";
+import { WORKFLOW_STEPS, furthestReachableStep, stepAt, useWorkflow } from "@/lib/frameguard/workflow";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -26,7 +26,7 @@ function Overview() {
   const w = useWorkflow();
   const { history, profile, file } = w;
   const furthest = furthestReachableStep(w);
-  const next = WORKFLOW_STEPS[furthest];
+  const next = stepAt(furthest);
 
   const analyzed = history.length;
   const prepared = history.filter(

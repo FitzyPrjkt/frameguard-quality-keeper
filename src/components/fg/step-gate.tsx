@@ -4,14 +4,14 @@ import { ArrowRight, Lock } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/fg/layout";
-import { WORKFLOW_STEPS } from "@/lib/frameguard/workflow";
+import { stepAt } from "@/lib/frameguard/workflow";
 import { useStepStates } from "@/components/fg/workflow-stepper";
 
 /** Renders children only when the workflow has reached this step. */
 export function StepGate({ step, children }: { step: number; children: ReactNode }) {
   const { furthest } = useStepStates();
   if (step <= furthest) return <>{children}</>;
-  const target = WORKFLOW_STEPS[furthest];
+  const target = stepAt(furthest);
   return (
     <EmptyState
       icon={Lock}

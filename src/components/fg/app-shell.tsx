@@ -24,7 +24,7 @@ import {
 import { LogoMark } from "@/components/fg/logo";
 import { ThemeToggle } from "@/components/fg/theme-toggle";
 import { CONFIG_NAV, PAGE_CONTEXT, WORKSPACE_NAV, type NavItem } from "@/components/fg/nav-config";
-import { WORKFLOW_STEPS, furthestReachableStep, useWorkflow } from "@/lib/frameguard/workflow";
+import { furthestReachableStep, stepAt, useWorkflow } from "@/lib/frameguard/workflow";
 
 function usePathname() {
   return useRouterState({ select: (s) => s.location.pathname });
@@ -32,7 +32,7 @@ function usePathname() {
 
 function usePrepareTarget() {
   const w = useWorkflow();
-  return WORKFLOW_STEPS[furthestReachableStep(w)].to;
+  return stepAt(furthestReachableStep(w)).to;
 }
 
 function NavGroup({ label, items }: { label: string; items: NavItem[] }) {

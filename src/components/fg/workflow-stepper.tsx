@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import {
   WORKFLOW_STEPS,
   furthestReachableStep,
+  stepAt,
   useWorkflow,
   type StepState,
 } from "@/lib/frameguard/workflow";
@@ -39,7 +40,7 @@ export function WorkflowStepper() {
             <span className="text-muted-foreground"> · {step?.label}</span>
           </span>
           {current < WORKFLOW_STEPS.length - 1 && (
-            <span className="text-muted-foreground">Next: {WORKFLOW_STEPS[current + 1].label}</span>
+            <span className="text-muted-foreground">Next: {stepAt(current + 1).label}</span>
           )}
         </div>
         <div className="mt-2 flex gap-1" aria-hidden>
@@ -82,7 +83,7 @@ export function WorkflowStepper() {
                   state === "skipped" && "line-through",
                 )}
               >
-                {s.label}
+                {s.short}
               </span>
               <span className="sr-only">
                 {s.label} — {state === "locked" ? "not yet available" : state}
